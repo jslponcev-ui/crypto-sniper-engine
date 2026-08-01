@@ -1,0 +1,28 @@
+[Unit]
+Description=Crypto Sniper Engine (Arbitrage Bot)
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/crypto-sniper-engine
+
+# Comando para ejecutar usando el Python del entorno virtual en Linux
+ExecStart=/home/ubuntu/crypto-sniper-engine/venv/bin/python main.py
+
+# Reinicio automático
+Restart=on-failure
+RestartSec=5s
+
+# Límite de reinicios (evita loops infinitos si hay un error persistente)
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+# Variables de entorno y salida de logs en vivo
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
