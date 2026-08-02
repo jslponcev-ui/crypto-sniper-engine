@@ -1,6 +1,7 @@
 # main.py
 import asyncio
 import os
+import aiohttp
 from aiohttp import web
 from config import WATCHED_TOKENS, TRADE_AMOUNT_USD, PROFIT_THRESHOLD_USD, ACTIVE_EXCHANGES, HELIUS_API_KEY
 from src.live_stream import PriceStreamer
