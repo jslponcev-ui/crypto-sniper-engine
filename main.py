@@ -1,11 +1,25 @@
 # main.py
 import asyncio
-import aiohttp
+import os
+from aiohttp import web
 from config import WATCHED_TOKENS, TRADE_AMOUNT_USD, PROFIT_THRESHOLD_USD, ACTIVE_EXCHANGES, HELIUS_API_KEY
 from src.live_stream import PriceStreamer
 from src.fees import FeeManager
 
+async def handle(request):
+    return web.Response(text="Bot vivo")
+
+async def start_dummy_server():
+    port = int(os.environ.get("PORT", 8080))
+    app = web.Application()
+    app.add_routes([web.get('/', handle)])
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, '0.0.0.0', port)
+    await site.start()
+
 async def main():
+    asyncio.create_task(start_dummy_server())
     print("🚀 Iniciando Bot de Arbitraje Híbrido Multi-Token (Modo Seguro)...", flush=True)
     print(f"⚡ [Helius RPC]: Conectado exitosamente con API Key ({HELIUS_API_KEY[:8]}...)", flush=True)
     

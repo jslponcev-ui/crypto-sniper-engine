@@ -3,6 +3,7 @@ import os
 # Lee las variables del sistema (las que pusimos en el Dashboard de Render)
 # Si no encuentra alguna, usará el valor por defecto que pongas a la derecha
 HELIUS_API_KEY = os.environ.get("HELIUS_API_KEY", "SIN_KEY")
+HELIUS_RPC_URL = f"https://mainnet.helius-rpc.com/?api-key={HELIUS_API_KEY}"
 TRADE_AMOUNT_USD = float(os.environ.get("TRADE_AMOUNT_USD", 500.0))
 PROFIT_THRESHOLD_USD = float(os.environ.get("PROFIT_THRESHOLD_USD", 0.50))
 ACTIVE_EXCHANGES = ["binance", "okx"]
